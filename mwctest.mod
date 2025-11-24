@@ -8,6 +8,9 @@ IMPORT Mwc63x2, Out, Random;
 
 TYPE GetRandom = PROCEDURE () : INTEGER;
 
+(**
+ * @brief Sort the array of integer using the comb sort algorithm.
+ *)
 PROCEDURE SortInt(VAR x : ARRAY OF INTEGER; len : INTEGER);
 VAR
     i, t : INTEGER;
@@ -61,14 +64,25 @@ BEGIN
 END BSpaceGetNDups;
 
 
-
+(**
+ * @brief Birthday spacings test for pseudorandom number generator
+ * @details This test was discovered by G. Marsaglia in 1980 and is
+ * rather efficient against bad LCGs, additive/subtractive lagged
+ * Fibonacci generators etc.
+ *
+ * References:
+ *
+ * Marsaglia, G., & Tsang, W. W. Some Difficult-to-pass Tests of Randomness. //
+ * // Journal of Statistical Software. 2002. V. 7. N 3. P. 1-9.
+ * https://doi.org/10.18637/jss.v007.i03
+ *)
 PROCEDURE BSpaceTest(next_rand : GetRandom);
 CONST
     len = 4096;
     nsamples = 1000;
     lambda_theor = 8.0;
-    lambda_min = 7.3;
-    lambda_max = 8.7;
+    lambda_min = 7.3; (* lambda for p ~ 1e-15 *)
+    lambda_max = 8.7; (* lambda for p ~ 1 - 1e-15 *)
 VAR    
     u : ARRAY len OF INTEGER;
     i, j, ndups : INTEGER;

@@ -6,10 +6,10 @@
  * and passes (tested for C implementation):
  *
  * - TestU01 SmallCrush, Crush and BigCrush batteries.
- * - PractRand 0.94 at least up to 2 TiB.
+ * - PractRand 0.94 at least up to 8 TiB.
  * - SmokeRand express, brief, default and full batteries.
  *
- * Even with bad multipliers (a0 = ...., a1 = ....) it passees TestU01 and
+ * Even with bad multipliers (a0 = 4005, a1 = 3939) it passees TestU01 and
  * SmokeRand batteries and also PractRand 0.94 at least up to 2 TiB.
  *
  * @copyright (c) 2025 Alexey L. Voskov
