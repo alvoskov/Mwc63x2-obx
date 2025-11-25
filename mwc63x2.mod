@@ -94,6 +94,8 @@ PROCEDURE Mwc63x2_Init*(obj : POINTER TO Mwc63x2State; s0, s1 : INTEGER);
 VAR
     i, u : INTEGER;    
 BEGIN
+    IF s0 <= 0 THEN s0 := 12345; END;
+    IF s1 <= 0 THEN s1 := 67890; END;
     obj.x[0] := s0; obj.x[0] := obj.x[0] + twopow32;
     obj.x[1] := s1; obj.x[1] := obj.x[1] + twopow32;
     (* Warmup *)
