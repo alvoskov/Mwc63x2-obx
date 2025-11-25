@@ -9,8 +9,35 @@
  * - PractRand 0.94 at least up to 8 TiB.
  * - SmokeRand express, brief, default and full batteries.
  *
+ * TestU01 and SmokeRand batteries were successful even for reversed bit
+ * order.
+ *
  * Even with bad multipliers (a0 = 4005, a1 = 3939) it passees TestU01 and
  * SmokeRand batteries and also PractRand 0.94 at least up to 2 TiB.
+ *
+ * MWC is rather famous algorithm developed by G. Marsaglia, it is an
+ * essentially LCG with prime modulo in a specific form that allows very
+ * fast high precision arithmetics.
+ *
+ * m = ab - 1 (where b = 2**31 for this implementation, also a < b)
+ *
+ * The interal state of the corresponding LCG is u = bc + x where c is
+ * the carry, the x is the lower part of the multiplication result.
+ * We can use the (a +- m) mod m = a mod m formula to prove the connection:
+ *
+ * (a * (bc + x) ) mod m = (abc + ax) mod m = (ab(c - 1) + ax + 1) mod m =
+ * ... = (ax + c) mod m = ax + c.
+ * 
+ * mod m was excluded due to restrictions on initialization.
+ *
+ * References:
+ *
+ * 1. George Marsaglia. Random Number Generators // Journal of Modern Applied
+ *    Statistical Methods. 2003. V. 2. N 1. P. 2-13.
+ *    https://doi.org/10.22237/jmasm/1051747320
+ * 2. G. Marsaglia "Multiply-With-Carry (MWC) generators" (from DIEHARD
+ *    CD-ROM) https://www.grc.com/otg/Marsaglia_MWC_Generators.pdf
+ * 3. https://github.com/lpareja99/spectral-test-knuth
  *
  * @copyright (c) 2025 Alexey L. Voskov
  * This software is licensed under the MIT license.
